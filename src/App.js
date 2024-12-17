@@ -44,13 +44,9 @@ const questions = [
 ];
 
 function FlashCards() {
-  const [isClicked, setIsClicked] = useState(null);
   const [indexValue, setIndex] = useState(null);
   function handleClick(currIndex) {
-    console.log("current Index--->", currIndex);
-
-    setIsClicked((click) => !click);
-    setIndex(currIndex);
+    setIndex(currIndex === indexValue ? null : currIndex);
   }
   return (
     <>
@@ -58,10 +54,10 @@ function FlashCards() {
         {questions.map((item, index) => (
           <div
             onClick={() => handleClick(index)}
-            className={`${isClicked && index === indexValue ? "selected" : ""}`}
+            className={`${indexValue === index ? "selected" : ""}`}
             key={index}
           >
-            {isClicked && index === indexValue ? item.answer : item.question}
+            {indexValue === index ? item.answer : item.question}
           </div>
         ))}
       </div>
